@@ -1,0 +1,171 @@
+﻿@model IEPLeaveManagementSystem.Models.LeaveModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<br />
+<h2>Request Leave </h2>
+
+@using (Html.BeginForm("Create", "EmployeeLeaves", FormMethod.Post, new { id = "createLeaveForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr /><br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @{
+            List<SelectListItem> startTime = new List<SelectListItem>()
+        {
+                //new SelectListItem {Text = "8:00", Value = "8:00"},
+                //new SelectListItem {Text = "10:00", Value = "10:00"},
+                //new SelectListItem {Text = "12:00", Value = "12:00"},
+                //new SelectListItem {Text = "15:00", Value = "15:00"}
+
+                //new SelectListItem {Text = "8:30", Value = "8:30"},
+                //new SelectListItem {Text = "10:30", Value = "10:30"},
+                //new SelectListItem {Text = "12:30", Value = "12:30"},
+                //new SelectListItem {Text = "13:00", Value = "13:00"},
+                //new SelectListItem {Text = "15:00", Value = "15:00"}
+
+                new SelectListItem {Text = "8:30", Value = "8:30"},
+                new SelectListItem {Text = "13:00", Value = "13:00"},
+            };
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StartingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartingDate, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.StatingTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.StatingTime, startTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StatingTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @{
+            List<SelectListItem> endTime = new List<SelectListItem>()
+        {
+                //new SelectListItem {Text = "17:00", Value = "17:00"},
+                //new SelectListItem {Text = "15:00", Value = "15:00"},
+                //new SelectListItem {Text = "12:00", Value = "12:00" },
+                //new SelectListItem {Text = "10:00", Value = "10:00"}
+
+                //new SelectListItem {Text = "17:00", Value = "17:00"},
+                //new SelectListItem {Text = "15:00", Value = "15:00"},
+                //new SelectListItem {Text = "13:00", Value = "13:00"},
+                //new SelectListItem {Text = "12:30", Value = "12:30" },
+                //new SelectListItem {Text = "10:30", Value = "10:30"}
+
+                new SelectListItem {Text = "17:00", Value = "17:00"},
+                new SelectListItem {Text = "12:30", Value = "12:30" },
+            };
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.EndingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndingDate, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.EndTime, endTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Type, ViewBag.LeaveType as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="text-danger">
+                @ViewBag.ErrorMessage
+            </div>
+            <div class="col-md-offset-10 col-md-2">
+                <input type="button" value="Request" class="btn btn-primary custom-btn  apply-leave-btn" id="btnSubmit" onclick="submitDetailsForm();"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <input type="button" id="btnBackToList" onclick="BacktoList();" class="btn btn-secondary" value="Go Back" />
+    
+
+    <div id="wait" style="display:none;width:70px;height:89px;border:0px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src="~/image/loader.gif" width="64" height="64" /><br>Processing..</div>
+
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#wait").css("display", "none");
+        });
+
+        function submitDetailsForm() {
+            $("#wait").css("display", "block");
+            $("#btnSubmit").attr("disabled", "disabled");
+            $("#btnBackToList").attr("disabled", "disabled");
+            var isValid = $('#createLeaveForm').valid()
+
+            if (isValid) {
+                $("#createLeaveForm").submit();
+            } else {
+                $("#wait").css("display", "none");
+                $("#btnSubmit").removeAttr("disabled");
+                $("#btnBackToList").removeAttr("disabled");
+            }
+        }
+
+        function BacktoList() {
+            window.location.href = '@Url.Action("Index", "EmployeeLeaves")'
+        }
+
+
+
+        //function submitDetailsForm() {
+
+        //    $("#createLeaveForm").submit(
+        //        function (e) {
+        //            e.preventDefault();
+        //            $("#wait").css("display", "block");
+        //            //var actionurl = e.currentTarget.action;
+
+        //            $.ajax({
+        //                url: this.action,
+        //                type: 'post',
+        //                dataType: 'application/json',
+        //                data: $("#createLeaveForm").serialize(),
+        //                success: function (data) {
+        //                    $("#wait").css("display", "none");
+        //                }
+        //            });
+        //        }
+
+        //    );
+
+        //}
+</script>
+}

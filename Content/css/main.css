@@ -1,0 +1,8 @@
+﻿@import url('modules/common/core.css');
+@import url('modules/common/common.css');
+@import url('modules/common/header.css');
+@import url('modules/pages/auth-pages.css');
+@import url('modules/pages/landing.css');
+@import url('modules/pages/create-employee.css');
+@import url('modules/pages/employees.css');
+@import url('modules/pages/approve-leave-request.css');

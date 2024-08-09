@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d0a7cd126b74272a839baeee5ff46c9" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="testModel.C__MigrationHistory" Width="1.5" PointX="0.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.AspNetUser" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Employee" Width="1.5" PointX="5.375" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Leave" Width="1.5" PointX="9.5" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="testModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Employee_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Employee_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Leave_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_LeaveCreate_Employee" />
+        <AssociationConnector Association="testModel.FK_LeaveDelete_Employee" />
+        <AssociationConnector Association="testModel.FK_LeaveModify_Employee" />
+        <EntityTypeShape EntityType="testModel.EmployeeLeave" Width="1.5" PointX="7.625" PointY="18.875" />
+        <AssociationConnector Association="testModel.FK_EmployeeLeave_Employee1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

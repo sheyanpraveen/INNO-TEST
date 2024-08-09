@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+@using IEPLeaveManagementSystem.Common;
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - Leave Management</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        #tableLeave {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Leave Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            <div class="app-logo">
+                <img src="~/Content/images/LMS-Logo-BW.png" />
+            </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><span style="width:100px;"></span></li>
+                    
+                    @if (Request.IsAuthenticated && (User.IsInRole(Constants.RoleNameHR)))
+                    {
+                        
+                        <li>@Html.ActionLink("Create Employee", "Create", "Employees")</li>
+                    }  
+                    @if (Request.IsAuthenticated && (User.IsInRole(Constants.RoleNameGM)|| User.IsInRole(Constants.RoleNameHR)))
+                    {
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                    }                   
+                    @if (User.IsInRole(Constants.RoleNameSupervisor))
+                    {
+                        <li>@Html.ActionLink("Approve Leave Request", "Index", "Leaves")</li>
+                        <li>@Html.ActionLink("Approved Leave History", "ApprovedLeaveHistory", "Leaves")</li>
+                    }
+                    @*@if (User.IsInRole(Constants.RoleNameGM))
+                    {
+                        <li>@Html.ActionLink("Leave Request", "Index", "SecondLeave")</li>
+                    }*@
+                    @if (User.IsInRole(Constants.RoleNameEmployee))
+                    {
+                        <li>@Html.ActionLink("Request Leave", "Index", "EmployeeLeaves")</li>
+                        <li>@Html.ActionLink("Leave History", "LeaveHistory", "EmployeeLeaves")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        @RenderBody()
+        @*<hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

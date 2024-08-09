@@ -1,0 +1,50 @@
+﻿#btnApprove, #btnReject {
+    width: 120px;
+}
+
+@media only screen and (max-width: 600px) {
+    #btnApprove, #btnReject {
+        width: -webkit-fill-available !important;
+    }
+
+    #btnReject {
+        margin-left: 0px !important;
+        /*margin-top: 8px;*/
+    }
+}
+
+/*@media only screen and (max-width: 1600px) {
+    #btnApprove, #btnReject {
+        width: 126px !important;
+    }
+}*/
+
+/*@media only screen and (min-width: 1919px) {
+    #btnReject {
+        margin-left: 19px !important;
+    }
+}*/
+
+@media only screen and (max-width: 991px) {
+    #btnReject {
+        margin-top: 8px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1518px) {
+    #btnReject {
+        margin-left: 42px;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    #btnReject {
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    .apply-leave-btn {
+        margin-left: 0px;
+    }
+}

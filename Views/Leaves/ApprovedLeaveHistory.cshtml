@@ -1,0 +1,84 @@
+﻿@model IEnumerable<IEPLeaveManagementSystem.Models.LeaveViewModel>
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />*@
+<link rel="stylesheet" type="text/css" href="~/Content/css/jquery.dataTables.min.css" />
+
+@{
+    ViewBag.Title = "Approved Leave History";
+}
+
+<br />
+<h2>Approved Leave History</h2>
+<br />
+
+<table id="approvalhistory" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.StartingDate
+                </td>
+                <td>
+                    @item.EndingDate
+                </td>
+                <td>
+                    @item.NumberOfDate
+                </td>
+                <td>
+                    @item.Type
+                </td>
+                @*@if (item.StartingDate > DateTime.Now)
+                    {*@
+                <td>
+                    @Html.ActionLink("Cancel Leave", "CancelLeave", new { id = item.RequestId }, new { onclick = "return confirm('Are you sure you want to cancel leave approval?');" })
+                </td>
+                @*}
+                    else
+                    {
+                        <td></td>
+                    }*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#approvalhistory').DataTable({
+                "lengthMenu": [10, 25, 50, 75, 100]
+            });
+        });
+    </script>
+}
+

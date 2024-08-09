@@ -1,0 +1,112 @@
+﻿@model IEPLeaveManagementSystem.DataConnection.EmployeeLeave
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EmployeeLeave</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCasual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCasual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemainingCasual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemainingCasual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAnnual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAnnual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemainingAnnual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemainingAnnual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalMedical)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalMedical)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemainigMedical)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemainigMedical)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalLieuLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalLieuLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemainigLieuLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemainigLieuLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

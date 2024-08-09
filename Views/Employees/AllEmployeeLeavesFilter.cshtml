@@ -1,0 +1,105 @@
+﻿@*@model IEPLeaveManagementSystem.Models.AllEmployeeLeaveFilterViewModel*@
+@model IEPLeaveManagementSystem.Models.AllEmployeeLeaveFilterViewModel
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "AllEmployeeLeavesFilter";
+}
+
+
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<br />
+<h2>Leave Requests</h2>
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<br />
+
+@using (Html.BeginForm("AllEmployeeLeavesFilter", "Employees", FormMethod.Get))
+{
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3 filter-options">
+                @Html.LabelFor(model => model.StartingDate, "Starting Date", htmlAttributes: new { @class = "control-label col-md-4 padding-left-8" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.StartingDate, new { @type = "date", @class = "form-control datepicker" })
+                </div>
+            </div>
+            <div class="col-md-3 filter-options">
+                @Html.LabelFor(model => model.EndingDate, "Ending Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.EndingDate, new { @type = "date", @class = "form-control datepicker" })
+                </div>
+            </div>
+            <div class="col-md-3 filter-options">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-3 filter-options">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.Type, ViewBag.LeaveType as IEnumerable<SelectListItem>, "Select Leave Type", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-2 col-md-offset-10 margin-top-20">
+                <input type="submit" value="Search" class="btn btn-default search-btn" />
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <br />
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.leaveViewModelList.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leaveViewModelList.FirstOrDefault().StartingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leaveViewModelList.FirstOrDefault().EndingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leaveViewModelList.FirstOrDefault().Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leaveViewModelList.FirstOrDefault().Status)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.leaveViewModelList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+
+</table>
+Page @(Model.leaveViewModelList.PageCount < Model.leaveViewModelList.PageNumber ? 0 : Model.leaveViewModelList.PageNumber) of @Model.leaveViewModelList.PageCount
+
+@Html.PagedListPager(Model.leaveViewModelList, page => Url.Action("AllEmployeeLeavesFilter",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

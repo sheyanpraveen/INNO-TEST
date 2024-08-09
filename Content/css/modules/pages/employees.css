@@ -1,0 +1,194 @@
+﻿/*==========================================================================================================*/
+/*                                                 EMPLOYEE                                                 */
+/*==========================================================================================================*/
+
+/*.filter-by-name {
+    margin-top: -7px;
+}*/
+
+#SearchString {
+    padding: 5px 1px;
+}
+
+.filter-by-name > .btn {
+    margin-top: -1px;
+    /*background: #1e92ef;*/
+}
+
+.tbl-col-fname > a {
+    color: #666666;
+    text-decoration: none;
+    cursor: auto;
+}
+
+/*.employee-leave-link {
+    margin-top: 7px;
+}*/
+
+.emp-label{
+    min-width : 125px;
+}
+
+.create-btn {
+    background-color: #1e92ef;
+    color: white;
+}
+
+    .create-btn:hover {
+        background-color: #0e77cc;
+        border-color: #0e77cc;
+        color: white;
+    }
+
+    .create-btn a {
+        text-decoration: none;
+        color: white;
+    }
+
+.employee-leave-link {
+    margin-left: -50px;
+}
+
+@media only screen and (max-width: 376px) {
+    #SearchString {
+        width: 138px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .employee-leave-link {
+        margin-left: -15px !important;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .filter-by-name {
+        margin-left: -15px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .emp-form {
+        font-size: 12px;
+    }
+
+        .emp-form button, .emp-form input {
+            font-size: 12px;
+        }
+
+    /*.emp-form i {
+        display: none;
+    }*/
+}
+
+@media only screen and (min-width: 767px) and (max-width: 800px) {
+    .employee-leave-link {
+        margin-left: 34px !important;
+    }
+
+    p.filter-by-name {
+        margin-left: 56px;
+    }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1250px) {
+    .employee-leave-link {
+        margin-left: 52px !important;
+    }
+
+    p.filter-by-name {
+        margin-left: 90px;
+    }
+}
+
+@media only screen and (max-width: 1367px) {
+    .employee-leave-link {
+        margin-left: -25px;
+    }
+}
+
+    /*==========================================================================================================*/
+    /*                                       ALL EMPLOYEE LEAVES FILTER                                         */
+    /*==========================================================================================================*/
+    .filter-options {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .filter-options label {
+        margin-top: 7px;
+    }
+
+.search-btn {
+    float: right;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 991px) {
+    .search-btn {
+        float: left;
+        margin-left: 10px;
+    }
+}
+
+/*==========================================================================================================*/
+/*                                                    DETAILS                                               */
+/*==========================================================================================================*/
+
+.emp-details-lst dt{
+    margin-bottom: 8px;
+    color: #666666;
+}
+
+.emp-details-lst dd {
+    color: #666666;
+}
+
+.emp-details-lst .check-box {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.emp-details-lst, .emp-details-lst div, .emp-details-lst label {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+    .emp-details-lst p {
+        padding-left: 30px;
+    }
+
+/*.emp-details-lst {
+    padding-left: 0px;
+}
+
+.emp-details-lst label {
+    margin-bottom: 0px;
+}
+
+.emp-details-lst p {
+    margin: 0 0 15px;
+}*/
+
+@media only screen and (max-width: 767px) {
+    .emp-details-lst p {
+        padding-left: 0px;
+    }
+
+    .emp-details-pg h4, .emp-delete-pg h4 {
+        margin-bottom: 20px;
+    }
+}
+
+/*==========================================================================================================*/
+/*                                               EMPLOYEES-LEAVE                                            */
+/*==========================================================================================================*/
+#tableLeave td, #tableLeave th {
+    border: 1px solid #ddd;
+}
+
+@media only screen and (max-width: 850px) {
+    #tableLeave {
+        font-size: 10px;
+    }
+}

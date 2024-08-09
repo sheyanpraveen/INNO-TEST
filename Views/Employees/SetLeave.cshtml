@@ -1,0 +1,182 @@
+﻿@model IEPLeaveManagementSystem.Models.EmployeeLeaveModel
+
+@{
+    ViewBag.Title = "Set Leave";
+    var pageNumber = ViewBag.PageNumber;
+}
+
+<br />
+<h2 style="font-weight: bold;">Set Leave</h2>
+<br />
+
+@using (Html.BeginForm("PostSetLeave", "Employees", FormMethod.Post, new { id = "setLeaveForm" }))
+{
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmpID, new { id = "empID" })
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>@Html.Label("Employee name ", htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="4" style="font-weight: bold;">@Html.Display("EmpName", new { htmlAttributes = new { @class = "form-control" } })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        @*<td width="250px">@Html.Label("Select year ", htmlAttributes: new { @class = "control-label" })</td>*@
+                        <td width="250px"></td>
+                        <td width="150px">@Html.DropDownList("LeaveYear", (IEnumerable<SelectListItem>)ViewBag.LeaveYear, "--Select Year--", new { style = "width: 100%; height: 30px; " })</td>
+                        <td width="20px"></td>
+                        <td width="50px"><input type="button" id="btnSearch" value="Search" onclick="getLeaveDetailsYearWise();" class="btn btn-default" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalCasual, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalCasual, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td width="500px">@Html.ValidationMessageFor(model => model.TotalCasual, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalAnnual, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalAnnual, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.TotalAnnual, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalMedical, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalMedical, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.TotalMedical, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalLieuLeave, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalLieuLeave, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.TotalLieuLeave, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalShortLeave, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalShortLeave, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td> @Html.ValidationMessageFor(model => model.TotalShortLeave, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.TotalCarryForwardLeave, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.TotalCarryForwardLeave, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.TotalCarryForwardLeave, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.LeaveAllocatingYear, htmlAttributes: new { @class = "control-label" })</td>
+                        <td colspan="3">@Html.EditorFor(model => model.LeaveAllocatingYear, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.ValidationMessageFor(model => model.LeaveAllocatingYear, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td height="15px"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="hidden" name="page" value=@pageNumber /></td>
+                        <td colspan="3"></td>
+                        <td><input type="button" value="Set Leave" id="btnSubmit" class="btn btn-primary custom-btn" onclick="submitDetailsForm();" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Leaves Details", "Leave", new { id = Model.EmpID, page = pageNumber })
+
+    <div id="wait" style="display:none;width:70px;height:89px;border:0px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src="~/image/loader.gif" width="64" height="64" /><br>Processing..</div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript" language="javascript">
+        
+        function submitDetailsForm() {
+            $("#wait").css("display", "block");
+            $("#btnSubmit").attr("disabled", "disabled");
+            $("#btnSearch").attr("disabled", "disabled");
+            var isValid = $('#setLeaveForm').valid();
+
+            if (isValid) {
+
+                $('#setLeaveForm').submit();
+                @*$("#setLeaveForm").on("submit", function (e) {
+                e.preventDefault();
+
+                var isOk = confirm("Change Leave Details ?");
+
+                if (isOk) {
+                    $.ajax({
+                        url: this.action,
+                        type: this.method,
+                        data: $(this).serialize(),
+                        success: function () {
+                            window.location.href = "@Url.Action("Leave", "Employees", new { id = Model.EmpID, page = pageNumber })";
+                        }
+                    });
+                } else {
+                    window.location.href = "@Url.Action("SetLeave", "Employees", new { id = Model.EmpID, page = pageNumber })";
+                }
+            });*@
+            }
+            else {
+                $("#wait").css("display", "none");
+                $("#btnSubmit").removeAttr("disabled");
+                $("#btnSearch").removeAttr("disabled");
+            }
+        }
+
+        function getLeaveDetailsYearWise() {
+            $("#wait").css("display", "block");
+            $("#btnSearch").attr("disabled", "disabled");
+            $("#btnSubmit").attr("disabled", "disabled");
+            var leaveYear = $("#LeaveYear option:selected").val();
+            var id = $("#empID").val();
+
+            $.ajax({
+                url: '/Employees/SetLeave',
+                type: 'GET',
+                data: { 'id': id, 'leaveYear': leaveYear },
+                success: function (data) {
+                    $('#TotalCasual').val(data.TotalCasual);
+                    $('#TotalAnnual').val(data.TotalAnnual);
+                    $('#TotalMedical').val(data.TotalMedical);
+                    $('#TotalLieuLeave').val(data.TotalLieuLeave);
+                    $('#TotalShortLeave').val(data.TotalShortLeave);
+                    $('#TotalCarryForwardLeave').val(data.TotalCarryForwardLeave);
+                    $('#LeaveAllocatingYear').val(data.LeaveAllocatingYear);
+                    $("#wait").css("display", "none");
+                    $("#btnSearch").removeAttr("disabled");
+                    $("#btnSubmit").removeAttr("disabled");
+                }
+            })
+        }
+
+    </script>
+}

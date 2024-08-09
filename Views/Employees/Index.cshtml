@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<IEPLeaveManagementSystem.DataConnection.Employee>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+@*@model IEnumerable<IEPLeaveManagementSystem.DataConnection.Employee>*@
+
+@{
+    ViewBag.Title = "Index";
+    var pageNummber = ViewBag.PageNumber;
+}
+
+<br />
+<h2>Employees</h2>
+<br />
+
+<div class="form-group emp-form">
+    <div class="col-sm-2 padding-left-0">
+        <button class="btn create-btn">
+            <i class="bi bi-person-plus-fill"></i>&nbsp;&nbsp;@Html.ActionLink("Create New Employee", "Create")
+        </button>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn create-btn employee-leave-link">
+            <i class="bi bi-calendar2-week-fill"></i>&nbsp;&nbsp;@Html.ActionLink("Employee Leave", "AllEmployeeLeavesFilter")
+        </button>
+    </div>
+    <div class="col-sm-8">
+        @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+        {
+            <p class="filter-by-name">
+                Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Search" class="btn btn-default" />
+            </p>
+        }
+        <br />
+    </div>
+
+    <table class="table emp-tbl">
+        <tr>
+            <th class="tbl-col-fname">
+                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Mobile no.
+            </th>
+            <th>
+                Designation
+            </th>
+            <th>
+                Is Confirmed
+            </th>
+            <th>
+                Is Supervisor
+            </th>
+            <th>
+                Is Active
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSupervisor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID, page = pageNummber }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID, page = pageNummber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID, page = pageNummber }) |
+                    @Html.ActionLink("Leave quota", "SetLeave", new { id = item.ID, page = pageNummber })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+

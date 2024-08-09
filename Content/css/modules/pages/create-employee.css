@@ -1,0 +1,163 @@
+﻿/*==========================================================================================================*/
+/*                                        CREATE EMPLOYEE                                                   */
+/*==========================================================================================================*/
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+th,  td {
+    /*color: #4d4d4d !important;*/
+    color: #666666 !important;
+}
+
+hr {
+    display: none;
+}
+
+.create-form label {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.create-form div {
+    margin-bottom: 8px;
+}
+
+.custom-btn {
+    width: 85px;
+    background: #1e92ef;
+    border: #1e92ef;
+    color: white;
+    margin-left: -55px;
+}
+
+    .custom-btn:hover {
+        background-color: #0e77cc;
+        border-color: #0e77cc;
+        color: white;
+    }
+
+.create-form .custom-btn {
+    margin-left: 24px;
+}
+
+/* responsive mode */
+@media only screen and (max-width: 600px) {
+    input, select, textarea {
+        max-width: inherit !important;
+    }
+
+    .custom-btn {
+        width: -webkit-fill-available;
+        /*margin-left: 15px !important;*/
+        /*margin-right: 15px;*/
+        margin-bottom: 8px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /*.create-form label, .create-form input {
+        font-size: 13px;
+    }*/
+    br {
+        display: none;
+    }
+
+    /*.create-heading {
+        margin-left: 15px;
+    }*/
+
+    .create-form {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .create-form label {
+        padding-left: 15px;
+    }
+
+    .custom-btn {
+        /*margin-left: 0px !important;*/
+        margin-bottom: 8px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-toggle {
+        border: none;
+        margin-top: 22px;
+    }
+
+        .navbar-toggle span {
+            background-color: white !important;
+        }
+
+    .app-logo img {
+        margin-left: 13px;
+    }
+
+    .custom-btn {
+        margin-left: 0px !important;
+        margin-bottom: 8px;
+    }
+
+    /*.back-to-list {
+        margin-left: 15px;
+    }*/
+
+    /*.navbar-header {
+        width: 100vw;
+    }*/
+}
+
+@media only screen and (max-width: 797px) {
+    .create-form label, .create-form input {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 846px) {
+    .navbar-right a, .navbar-nav li {
+        font-size: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .app-logo img {
+        width: 88px;
+        margin-right: 0px;
+    }
+/*
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }*/
+}
+
+@media only screen and (max-width: 1221px) {
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .navbar-right a, .navbar-nav li {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 1367px) {
+    .custom-btn {
+        margin-left: -28px;
+    }
+
+    .create-form .custom-btn {
+        margin-left: 39px;
+    }
+
+    .navbar-right a, .navbar-nav li {
+        font-size: 12px;
+    }
+}
